@@ -1,0 +1,56 @@
+﻿@page
+@model PJSrenovationWeb.Pages.SelfEmployedPainters.EditModel
+@using PJSrenovationWeb.Models
+
+@{
+    ViewData["Title"] = "Edit";
+}
+<section id="edit-painter">
+    <header class="text-center">
+        <h1 class="col-sm-12 text-center">Edit Painter</h1>
+    </header>
+    <div class="row">
+        <div class="col-md-4 offset-lg-4">
+            <form method="post">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <input type="hidden" asp-for="SelfEmployedPainter.PainterID" />
+                <div class="form-group">
+                    <label asp-for="SelfEmployedPainter.FirstName" class="control-label"></label>
+                    <input asp-for="SelfEmployedPainter.FirstName" class="form-control" />
+                    <span asp-validation-for="SelfEmployedPainter.FirstName" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="SelfEmployedPainter.LastName" class="control-label"></label>
+                    <input asp-for="SelfEmployedPainter.LastName" class="form-control" />
+                    <span asp-validation-for="SelfEmployedPainter.LastName" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="SelfEmployedPainter.DrivingLicence" class="control-label"></label>
+                    <select asp-for="SelfEmployedPainter.DrivingLicence" class="form-control"
+                            asp-items="@Html.GetEnumSelectList<DrivingLicence>()"></select>
+                    <span asp-validation-for="SelfEmployedPainter.DrivingLicence" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="SelfEmployedPainter.YearOfStart" class="control-label"></label>
+                    <input asp-for="SelfEmployedPainter.YearOfStart" class="form-control" />
+                    <span asp-validation-for="SelfEmployedPainter.YearOfStart" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="SelfEmployedPainter.CurrentLocation" class="control-label"></label>
+                    <input asp-for="SelfEmployedPainter.CurrentLocation" class="form-control" />
+                    <span asp-validation-for="SelfEmployedPainter.CurrentLocation" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <input type="submit" value="Save" class="btn btn-primary" />
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div>
+        <a asp-page="./Index">Back to List</a>
+    </div>
+</section>
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

@@ -1,0 +1,127 @@
+﻿@page
+@model PJSrenovationWeb.Pages.PaintingJobs.IndexModel
+
+@{
+    ViewData["Title"] = "Painting Jobs";
+}
+<h1 >Painting Jobs</h1>
+
+<p>
+    <a asp-page="Create">Create New</a>
+</p>
+<form asp-page="./Index" method="get">
+    <div class="form-actions no-color">
+        <p>
+            Find by name:
+            <input type="text" name="SearchString" value="@Model.CurrentFilter" />
+            <input type="submit" value="Search" class="btn btn-primary" /> |
+            <a asp-page="./Index">Back to full List</a>
+        </p>
+    </div>
+</form>
+<div class="table-responsive">
+
+    <table class="table table-responsive">
+        <thead>
+            <tr>
+                <th>@Html.DisplayNameFor(model => model.PaintingDecoratingJob[0].Work.PropertyArea)</th>
+
+                <th>
+                    @Html.DisplayNameFor(model => model.PaintingDecoratingJob[0].Wall)
+                </th>
+
+                <th>
+                    @Html.DisplayNameFor(model => model.PaintingDecoratingJob[0].Brand)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.PaintingDecoratingJob[0].Finish)
+                </th>
+                <th>
+                    
+                    <a asp-page="./Index" asp-route-sortOrder="@Model.DateSort"
+                       asp-route-currentFilter="@Model.CurrentFilter">
+                        @Html.DisplayNameFor(model => model.PaintingDecoratingJob[0].StartDate)
+                    </a>
+                </th>
+                    @*<th>
+                        @Html.DisplayNameFor(model => model.PaintingDecoratingJob[0].EndDate)
+                    </th>*@
+                <th>
+                    @Html.DisplayNameFor(model => model.PaintingDecoratingJob[0].ManHours)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.PaintingDecoratingJob[0].Stages)
+                </th>
+                <th>
+                        @Html.DisplayNameFor(model => model.PaintingDecoratingJob[0].Work)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.PaintingDecoratingJob[0].Painter)
+                    </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.PaintingDecoratingJob)
+            {
+                <tr>
+                    <td>@Html.DisplayFor(modelItem => item.Work.PropertyArea)</td>
+
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Wall)
+                    </td>
+
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Brand)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Finish)
+                    </td>
+                    <td>
+                            @Html.DisplayFor(modelItem => item.StartDate)
+                        </td>
+                        @*<td>
+                            @Html.DisplayFor(modelItem => item.EndDate)
+                        </td>*@
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ManHours)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Stages)
+                    </td>
+                    <td>
+                            @Html.DisplayFor(modelItem => item.Work.WorkID)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Painter.PainterID)
+                        </td>
+                    <td>
+                        <a asp-page="./Edit" asp-route-id="@item.PaintDecoratingJobID">Edit</a> |
+                        <a asp-page="./Details" asp-route-id="@item.PaintDecoratingJobID">Details</a> |
+                        <a asp-page="./Delete" asp-route-id="@item.PaintDecoratingJobID">Delete</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    @{
+        var prevDisabled = !Model.PaintingDecoratingJob.HasPreviousPage ? "disabled" : "";
+        var nextDisabled = !Model.PaintingDecoratingJob.HasNextPage ? "disabled" : "";
+    }
+
+    <a asp-page="./Index"
+       asp-route-sortOrder="@Model.CurrentSort"
+       asp-route-pageIndex="@(Model.PaintingDecoratingJob.PageIndex - 1)"
+       asp-route-currentFilter="@Model.CurrentFilter"
+       class="btn btn-primary @prevDisabled">
+        Previous
+    </a>
+    <a asp-page="./Index"
+       asp-route-sortOrder="@Model.CurrentSort"
+       asp-route-pageIndex="@(Model.PaintingDecoratingJob.PageIndex + 1)"
+       asp-route-currentFilter="@Model.CurrentFilter"
+       class="btn btn-primary @nextDisabled">
+        Next
+    </a>
+
+</div>

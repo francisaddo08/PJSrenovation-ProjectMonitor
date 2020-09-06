@@ -1,0 +1,82 @@
+﻿@page
+@model PJSrenovationWeb.Pages.PaintingWorks.IndexModel
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Painting Works</h1>
+
+<p>
+    <a asp-page="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.PaintingDecoratingWork[0].PropertyArea)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PaintingDecoratingWork[0].Surface)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PaintingDecoratingWork[0].ExpectedHours)
+            </th>
+           
+            @*<th>
+                @Html.DisplayNameFor(model => model.PaintingDecoratingWork[0].WorkImage)
+            </th>*@
+            @*<th>
+                @Html.DisplayNameFor(model => model.PaintingDecoratingWork[0].ImageDate)
+            </th>*@
+            <th>
+                @Html.DisplayNameFor(model => model.PaintingDecoratingWork[0].Project)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model.PaintingDecoratingWork) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.PropertyArea)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Surface)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ExpectedHours)
+            </td>
+            @*<td>
+                @Html.DisplayFor(modelItem => item.WorkImage)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ImageDate)
+            </td>*@
+            <td>
+                @Html.DisplayFor(modelItem => item.Project.ProjectID)
+            </td>
+            <td>
+                @{
+                    Dictionary<string, string> JobValues = new Dictionary<string, string>();
+                    {
+                        JobValues.Add("WorkId", item.WorkID);
+                        JobValues.Add("PropertyArea", item.PropertyArea);
+                        JobValues.Add("WorkArea", item.WorkArea);
+                        JobValues.Add("Surface", item.Surface.ToString());
+                        JobValues.Add("ExpectedHours", item.ExpectedHours.ToString());
+                        JobValues.Add("ProjectID", item.Project.ProjectID);
+                        JobValues.Add("ProjectStart", item.Project.StartDate.ToString("dd/MM/yyyy"));
+                        JobValues.Add("ProjectEnd", item.Project.EndDate.ToString("dd/MM/yyyy"));
+                    };
+                }
+                <a asp-page="./Edit" asp-route-id="@item.WorkID">Edit</a> |
+                <a asp-page="./Details" asp-route-id="@item.WorkID">Details</a> |
+                <a asp-page="./Delete" asp-route-id="@item.WorkID">Delete</a> |
+                <a asp-page="/PaintingJobs/Create" asp-all-route-data="@JobValues">Job</a>
+
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

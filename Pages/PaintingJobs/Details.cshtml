@@ -1,0 +1,133 @@
+﻿@page
+@model PJSrenovationWeb.Pages.PaintingJobs.DetailsModel
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+
+<div>
+    <div class="row">
+        <h4 class="font-italic font-weight-bold col-sm-4">@Model.PaintingDecoratingJob.Work.PropertyArea</h4>
+        <p class="col-sm-4">@Model.PaintingDecoratingJob.Work.Project.Property.FullAddress</p>
+    </div>
+   
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.PaintingDecoratingJob.UnderCoatType)
+        </dt>
+        <dd class="col-sm-4">
+            @Html.DisplayFor(model => model.PaintingDecoratingJob.UnderCoatType)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.PaintingDecoratingJob.UnderCoatName)
+        </dt>
+        <dd class="col-sm-4">
+            @Html.DisplayFor(model => model.PaintingDecoratingJob.UnderCoatName)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.PaintingDecoratingJob.Wall)
+        </dt>
+        <dd class="col-sm-4">
+            @Html.DisplayFor(model => model.PaintingDecoratingJob.Wall)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.PaintingDecoratingJob.Ceiling)
+        </dt>
+        <dd class="col-sm-4">
+            @Html.DisplayFor(model => model.PaintingDecoratingJob.Ceiling)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.PaintingDecoratingJob.Door)
+        </dt>
+        <dd class="col-sm-4">
+            @Html.DisplayFor(model => model.PaintingDecoratingJob.Door)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.PaintingDecoratingJob.Window)
+        </dt>
+        <dd class="col-sm-4">
+            @Html.DisplayFor(model => model.PaintingDecoratingJob.Window)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.PaintingDecoratingJob.Brand)
+        </dt>
+        <dd class="col-sm-4">
+            @Html.DisplayFor(model => model.PaintingDecoratingJob.Brand)
+        </dd>
+
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.PaintingDecoratingJob.WallColourName)
+        </dt>
+        <dd class="col-sm-4">
+            @Html.DisplayFor(model => model.PaintingDecoratingJob.WallColourName)
+        </dd>
+
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.PaintingDecoratingJob.WallColourValue)
+        </dt>
+        <dd class="col-sm-4">
+            @Html.DisplayFor(model => model.PaintingDecoratingJob.WallColourValue)
+        </dd>
+
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.PaintingDecoratingJob.Finish)
+        </dt>
+        <dd class="col-sm-4">
+            @Html.DisplayFor(model => model.PaintingDecoratingJob.Finish)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.PaintingDecoratingJob.StartDate)
+        </dt>
+        <dd class="col-sm-4">
+            @Html.DisplayFor(model => model.PaintingDecoratingJob.StartDate)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.PaintingDecoratingJob.EndDate)
+        </dt>
+        <dd class="col-sm-4">
+            @Html.DisplayFor(model => model.PaintingDecoratingJob.EndDate)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.PaintingDecoratingJob.ManHours)
+        </dt>
+        <dd class="col-sm-4">
+            @Html.DisplayFor(model => model.PaintingDecoratingJob.ManHours)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.PaintingDecoratingJob.Stages)
+        </dt>
+        <dd class="col-sm-4">
+            @Html.DisplayFor(model => model.PaintingDecoratingJob.Stages)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.PaintingDecoratingJob.JobImage)
+        </dt>
+        <dd class="col-sm-4">
+            @Html.DisplayFor(model => model.PaintingDecoratingJob.JobImage)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.PaintingDecoratingJob.ImageDate)
+        </dt>
+        <dd class="col-sm-4">
+            @Html.DisplayFor(model => model.PaintingDecoratingJob.ImageDate)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.PaintingDecoratingJob.Work)
+        </dt>
+        <dd class="col-sm-4">
+            @Html.DisplayFor(model => model.PaintingDecoratingJob.Work.WorkID)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.PaintingDecoratingJob.Painter)
+        </dt>
+        <dd class="col-sm-4">
+            @Html.DisplayFor(model => model.PaintingDecoratingJob.Painter.FullName)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-page="./Edit" asp-route-id="@Model.PaintingDecoratingJob.PaintDecoratingJobID">Edit</a> |
+    <a asp-page="./Index">Back to List</a>
+</div>

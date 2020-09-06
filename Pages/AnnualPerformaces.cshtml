@@ -1,0 +1,329 @@
+﻿@page
+@model PJSrenovationWeb.Pages.AnnualPerformacesModel
+@{
+}
+<section id="annual-performance">
+    <div class="row">
+        <div class="col-sm-12 text-center">
+            <p><u class="display-4"> Trends and Performances</u></p>
+        </div>
+    </div>
+   
+    <div class="row ">
+        <div class="col-sm-6  card" id="finish-trends">
+            @*Finish Trends*@
+        </div>
+        <div id="colour-trends" class="col-sm-6  card">
+            @*Ten Year Colour Trend*@
+        </div>
+    </div>
+    <div class="row mt-2 mb-2 card ">
+        
+
+            <table id="project-labour-hours" class="col-sm-12 table-bordered table-striped ">
+
+                <thead>
+                    <tr>
+                        <th class="mr-1 p-1">Address</th>
+                        <th class="mr-1 p-1">House Size </th>
+                        <th class="mr-1 p-1">Expected hours</th>
+                        <th class="mr-1 p-1">Actual hours</th>
+                    </tr>
+                </thead>
+                <tbody id="databody">
+                </tbody>
+            </table>
+         @*end of table column*@
+    </div> @*End of table row*@
+    <div id="yearly" class="row">
+        <div id="project" class="col-sm-12 col-md-12 col-lg-12 col-xl-12 col-12 card " style="height: 400px">
+
+        </div>
+    </div>
+
+
+
+
+
+
+</section>
+
+
+
+@section Dashboard_Scripts {
+
+    @*=======<!--Load the AJAX API-->=========================================*@
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript">
+        google.charts.load('current', { packages: ['corechart'] });
+    </script>
+    <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+
+
+    @*==============================================================*@
+    @*====================Wall Finish Pie Chart========================*@
+    <script language="JavaScript">
+        function drawChart() {
+            var jsonData = $.ajax({
+                url: "/api/AnnualPerformance/WallFinishTrends",
+                dataType: "json",
+                async: false
+            }).responseText;
+            var serverData = JSON.parse(jsonData);
+            console.log( serverData);
+            var arrayRows = [];
+            for (let finishTrend of serverData) {
+                arrayRows.push([finishTrend.Finish, finishTrend.Count]);
+                
+            }
+            console.log(arrayRows);
+            // Define the chart to be drawn.
+            var data = new google.visualization.DataTable();
+            data.addColumn('string', 'Wall Colours');
+            data.addColumn('number', 'Percentage');
+            for (var i = 0; i < arrayRows.length; i++) {
+                data.addRows([arrayRows[i]]);
+            }
+            //data.addRows([
+            //    ['Firefox', 45.0],
+            //    ['IE', 26.8],
+            //    ['Chrome', 12.8],
+            //    ['Safari', 8.5],
+            //    ['Opera', 6.2],
+            //    ['Others', 0.7]
+            //]);
+
+            // Set chart options
+            var options = {
+                'title': 'Ten Years Wall Finish Trends',
+                'width': 550,
+                'height': 400
+            };
+
+            // Instantiate and draw the chart.
+            var chart = new google.visualization.PieChart(document.getElementById('finish-trends'));
+            chart.draw(data, options);
+        }
+        google.charts.setOnLoadCallback(drawChart);
+    </script>
+    @*==================================================================*@
+
+    <script type="text/javascript">
+
+        window.onload = () => {
+            var xmlr = new XMLHttpRequest();
+
+            xmlr.onreadystatechange = function () {
+                if (this.readyState == 4 && this.status == 200) {
+                    console.log(this.responseText);
+                    var responseJson = JSON.parse(this.responseText);
+
+                    colourTrendTable(responseJson);
+                    console.log(responseJson);
+                }
+            }
+            xmlr.open("GET", "/api/AnnualPerformance/ProjectAnalysis", true)
+            xmlr.send();
+
+        };
+        //=====================Table population function=================
+        function colourTrendTable(data) {
+            const tbody = document.getElementById('databody');
+            let rows = ' ';
+            for (let labourHours of data) {
+                rows +=
+                    `<tr>
+                                                                     <td class = "p-1">${labourHours.Address}</td>
+                                                                    <td class = "p-1">${labourHours.Size}</td>
+                                                                     <td class = "p-1">${labourHours.ExpectedHours}</td>
+                                                                     <td class = "p-1">${labourHours.ActualHours}</td>
+                                                                    </tr >`;
+            }
+            tbody.innerHTML = rows;
+        }
+
+    </script>
+
+
+
+
+
+    @*=======================Colunm Chart=======================*@
+    @*<script type="text/javascript">
+
+            // Load the Visualization API and the piechart package.
+            google.charts.load('current', { 'packages': ['corechart'] });
+
+            // Set a callback to run when the Google Visualization API is loaded.
+            google.charts.setOnLoadCallback(drawChart);
+
+            function drawChart() {
+                var jsonData = $.ajax({
+                    url: "/api/AnnualPerformance/ColourTrend",
+                    dataType: "json",
+                    async: false
+                }).responseText;
+                console.log(jsonData);
+                var jObj = JSON.parse(jsonData);
+                var arrayRows = [];
+                var arrayColors = [];
+                for (let colourObj of jObj) {
+                    arrayRows.push([colourObj.ColourName, colourObj.Count]);
+                    arrayColors.push(colourObj.ColourValue)
+                }
+
+                // Create our data table out of JSON data loaded from server.
+                var data = new google.visualization.DataTable();
+                data.addColumn('string', 'Colour');
+                data.addColumn('number', 'Count');
+                for (var i = 0; i < arrayRows.length; i++) {
+                    data.addRows([arrayRows[i], arrayRows[i]]);
+                }
+                var options =
+                {
+                    'title': 'Ten Years Colour Trends',
+                    'width': 400,
+                    'height': 240,
+                    'vAxis': { title: 'Occurance', titleTextStyle: { color: 'red' } },
+
+                };
+                // Instantiate and draw our chart, passing in some options.
+                var chart = new google.visualization.ColumnChart(document.getElementById('colour-trend'));
+                chart.draw(data, options /*{ width: 400, height: 240 }*/);
+
+            }
+
+        </script>*@
+
+    @*======================END OF COLUMN CHART=====================*@
+    @*==============================Pie Chart========================*@
+    <script language="JavaScript">
+        function drawChart() {
+            var jsonData = $.ajax({
+                url: "/api/AnnualPerformance/ColourTrend",
+                dataType: "json",
+                async: false
+            }).responseText;
+            var jObj = JSON.parse(jsonData);
+            var arrayRows = [];
+            var arrayColors = [];
+            for (let colourObj of jObj) {
+                arrayRows.push([colourObj.ColourName, colourObj.Count]);
+                arrayColors.push(colourObj.ColourValue)
+            }
+            // Define the chart to be drawn.
+            console.log(arrayColors);
+            var data = new google.visualization.DataTable();
+            data.addColumn('string', 'Wall Colours');
+            data.addColumn('number', 'Percentage');
+            for (var i = 0; i < arrayRows.length; i++) {
+                data.addRows([arrayRows[i]]);
+            }
+            //data.addRows([
+            //    ['Firefox', 45.0],
+            //    ['IE', 26.8],
+            //    ['Chrome', 12.8],
+            //    ['Safari', 8.5],
+            //    ['Opera', 6.2],
+            //    ['Others', 0.7]
+            //]);
+
+            // Set chart options
+            var options = {
+                'title': 'Ten Years Wall Colour Trends',
+                'width': 550,
+                'height': 400,
+                'colors': arrayColors
+            };
+
+            // Instantiate and draw the chart.
+            var chart = new google.visualization.PieChart(document.getElementById('colour-trends'));
+            chart.draw(data, options);
+        }
+        google.charts.setOnLoadCallback(drawChart);
+    </script>
+
+
+    @*============================YEARLY  CHART================================*@
+    <script type="text/javascript">
+        google.charts.load('current', { 'packages': ['bar'] });
+        google.charts.setOnLoadCallback(drawChart);
+        // global  data
+        var painterData;
+
+
+        $(document).ready(function () {
+            $.ajax({
+                url: '/api/AnnualPerformance/PaintingAnnualPerformance',
+                data: '',
+                dataType: 'json',
+                type: 'GET',
+                contentType: 'application/json; chartset=utf-8',
+                success: function (data) {
+                    painterData = data;
+                },
+                error: function () {
+                    alert("Error loading annual painting  data from server! Please try again");
+                },
+
+
+            }).done(function () {
+
+                console.log(painterData);
+            });
+
+
+        });
+
+
+        function drawChart() {
+            var data = google.visualization.arrayToDataTable(painterData);
+
+            var options = {
+                chart: {
+                    title: 'Painting Performance',
+                    subtitle: 'Work Targets and Performance ',
+                    height: 350,
+                },
+                'chartArea': { 'width': '82%', height: '60%', top: '9%', left: '15%', right: '3%', bottom: '0' } /* Adjust chart alignment to fit vertical labels for horizontal axis*/
+            };
+
+            var chart = new google.charts.Bar(document.getElementById('project'));
+
+            chart.draw(data, google.charts.Bar.convertOptions(options));
+        }
+    </script>
+
+
+    @*==========================END OF BAR CHART===========================*@
+
+    @*<script>
+            var painterData;
+
+
+            $(document).ready(function () {
+                $.ajax({
+                    url: '/api/AnnualPerformance/WallFinishTrends',
+                    data: '',
+                    dataType: 'json',
+                    type: 'GET',
+                    contentType: 'application/json; chartset=utf-8',
+                    success: function (data) {
+                        painterData = data;
+                    },
+                    error: function () {
+                        alert("Error loading quately data from server! Please try again");
+                    },
+
+
+                }).done(function () {
+
+                    console.log(painterData);
+                });
+
+
+            });
+
+        </script>*@
+
+} @*END OF SECTION*@

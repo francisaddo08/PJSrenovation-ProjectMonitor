@@ -1,0 +1,78 @@
+﻿@page
+@model PJSrenovationWeb.Pages.Properties.IndexModel
+
+@{
+    ViewData["Title"] = "Properties";
+}
+
+<h1>Properties</h1>
+
+<p>
+    <a asp-page="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Property[0].Address)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Property[0].Location)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Property[0].County)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Property[0].Postcode)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Property[0].PropertyType)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Property[0].NumberOfRooms)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Property[0].Client)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model.Property) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Address)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Location)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.County)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Postcode)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PropertyType)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NumberOfRooms)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Client.FullName)
+            </td>
+            <td>
+                @{ 
+                    Dictionary<string, string> ProjectData = new Dictionary<string, string>();
+                    ProjectData.Add("EntryDate", item.EntryDate.GetValueOrDefault().ToString());
+                    ProjectData.Add("PropertyID", item.PropertyID);
+                }
+                <a asp-page="./Edit" asp-route-id="@item.PropertyID">Edit</a> |
+                <a asp-page="./Details" asp-route-id="@item.PropertyID">Details</a> |
+                <a asp-page="./Delete" asp-route-id="@item.PropertyID">Delete</a> |
+                <a asp-page="/Projects/Create" asp-all-route-data="@ProjectData">Projects</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

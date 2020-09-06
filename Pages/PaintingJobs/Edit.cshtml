@@ -1,0 +1,128 @@
+﻿@page
+@model PJSrenovationWeb.Pages.PaintingJobs.EditModel
+@using PJSrenovationWeb.Models
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<section id="edit-painter">
+    <header class="text-center">
+        <h1 class="col-sm-12 text-center">Edit Job</h1>
+    </header>
+    <div class="row">
+        <div class="col-md-4 offset-lg-4">
+            <form method="post" enctype="multipart/form-data">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <input type="hidden" asp-for="PaintingDecoratingJob.PaintDecoratingJobID" />
+                <div class="form-group">
+                    <label asp-for="PaintingDecoratingJob.WorkID" class="control-label"></label>
+                    <select asp-for="PaintingDecoratingJob.WorkID" class="form-control" asp-items="ViewBag.WorkID"></select>
+                    <span asp-validation-for="PaintingDecoratingJob.WorkID" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="PaintingDecoratingJob.SelfEmployedPainterID" class="control-label"></label>
+                    <select asp-for="PaintingDecoratingJob.SelfEmployedPainterID" class="form-control"
+                            asp-items="ViewBag.SelfEmployedPainterID"></select>
+                    <span asp-validation-for="PaintingDecoratingJob.SelfEmployedPainterID" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="PaintingDecoratingJob.UnderCoatType" class="control-label"></label>
+                    <select asp-for="PaintingDecoratingJob.UnderCoatType" class="form-control"
+                            asp-items="@Html.GetEnumSelectList<UnderCoatType>()"></select>
+                    <span asp-validation-for="PaintingDecoratingJob.UnderCoatType" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="PaintingDecoratingJob.UnderCoatName" class="control-label"></label>
+                    <input asp-for="PaintingDecoratingJob.UnderCoatName" class="form-control" />
+                    <span asp-validation-for="PaintingDecoratingJob.UnderCoatName" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="PaintingDecoratingJob.Wall" class="control-label"></label>
+                    <input asp-for="PaintingDecoratingJob.Wall" class="form-control" />
+                    <span asp-validation-for="PaintingDecoratingJob.Wall" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="PaintingDecoratingJob.Ceiling" class="control-label"></label>
+                    <input asp-for="PaintingDecoratingJob.Ceiling" class="form-control" />
+                    <span asp-validation-for="PaintingDecoratingJob.Ceiling" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="PaintingDecoratingJob.Door" class="control-label"></label>
+                    <input asp-for="PaintingDecoratingJob.Door" class="form-control" />
+                    <span asp-validation-for="PaintingDecoratingJob.Door" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="PaintingDecoratingJob.Window" class="control-label"></label>
+                    <input asp-for="PaintingDecoratingJob.Window" class="form-control" />
+                    <span asp-validation-for="PaintingDecoratingJob.Window" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="PaintingDecoratingJob.Brand" class="control-label"></label>
+                    <input asp-for="PaintingDecoratingJob.Brand" class="form-control" />
+                    <span asp-validation-for="PaintingDecoratingJob.Brand" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="PaintingDecoratingJob.WallColourName" class="control-label"></label>
+                    <input asp-for="PaintingDecoratingJob.WallColourName" class="form-control" />
+                    <span asp-validation-for="PaintingDecoratingJob.WallColourName" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="PaintingDecoratingJob.WallColourValue" class="control-label"></label>
+                    <input asp-for="PaintingDecoratingJob.WallColourValue" class="form-control" />
+                    <span asp-validation-for="PaintingDecoratingJob.WallColourValue" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="PaintingDecoratingJob.Finish" class="control-label"></label>
+                    <select asp-for="PaintingDecoratingJob.Finish" class="form-control"
+                            asp-items="@Html.GetEnumSelectList<FinishTypes>()"></select>
+                    <span asp-validation-for="PaintingDecoratingJob.Finish" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="PaintingDecoratingJob.StartDate" class="control-label"></label>
+                    <input asp-for="PaintingDecoratingJob.StartDate" class="form-control" />
+                    <span asp-validation-for="PaintingDecoratingJob.StartDate" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="PaintingDecoratingJob.EndDate" class="control-label"></label>
+                    <input asp-for="PaintingDecoratingJob.EndDate" class="form-control" />
+                    <span asp-validation-for="PaintingDecoratingJob.EndDate" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="PaintingDecoratingJob.ManHours" class="control-label"></label>
+                    <input asp-for="PaintingDecoratingJob.ManHours" class="form-control" />
+                    <span asp-validation-for="PaintingDecoratingJob.ManHours" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="PaintingDecoratingJob.Stages" class="control-label"></label>
+                    <select asp-for="PaintingDecoratingJob.Stages" class="form-control"
+                            asp-items="@Html.GetEnumSelectList<Stages>()"></select>
+                    <span asp-validation-for="PaintingDecoratingJob.Stages" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="JobImage" class="control-label"></label>
+                    <input type="file" asp-for="JobImage" class="form-control" />
+                    <span asp-validation-for="JobImage" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="PaintingDecoratingJob.ImageDate" class="control-label"></label>
+                    <input asp-for="PaintingDecoratingJob.ImageDate" class="form-control" />
+                    <span asp-validation-for="PaintingDecoratingJob.ImageDate" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <input type="submit" value="Save" class="btn btn-primary" />
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div>
+        <a asp-page="./Index">Back to List</a>
+    </div>
+    </section>
+
+    @section Scripts {
+        @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    }

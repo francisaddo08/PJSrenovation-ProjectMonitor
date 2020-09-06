@@ -1,0 +1,76 @@
+﻿@page
+@model PJSrenovationWeb.Pages.PaintingWorks.CreateModel
+@using PJSrenovationWeb.Models
+@{
+    ViewData["Title"] = "Create Work";
+}
+
+<section id="create-painting-work">
+    <header class="text-center">
+        <h1 class="col-sm-12 text-center">Create new Work</h1>
+    </header>
+
+    <div class="row">
+        <div class="col-md-4 offset-lg-4">
+            <form method="post" enctype="multipart/form-data">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="form-group">
+                    <label asp-for="PaintingDecoratingWork.WorkID" class="control-label"></label>
+                    <input asp-for="PaintingDecoratingWork.WorkID" class="form-control" />
+                    <span asp-validation-for="PaintingDecoratingWork.WorkID" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="PaintingDecoratingWork.ProjectID" class="control-label"></label>
+                    <select asp-for="PaintingDecoratingWork.ProjectID" class="form-control" asp-items="ViewBag.ProjectID"></select>
+                </div>
+                <div class="form-group">
+                    <label asp-for="PaintingDecoratingWork.PropertyArea" class="control-label"></label>
+                    <input asp-for="PaintingDecoratingWork.PropertyArea" class="form-control" />
+                    <span asp-validation-for="PaintingDecoratingWork.PropertyArea" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="PaintingDecoratingWork.WorkArea" class="control-label"></label>
+                    <input asp-for="PaintingDecoratingWork.WorkArea" class="form-control" />
+                    <span asp-validation-for="PaintingDecoratingWork.WorkArea" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="PaintingDecoratingWork.Surface" class="control-label"></label>
+                    <select asp-for="PaintingDecoratingWork.Surface" class="form-control"
+                            asp-items="Html.GetEnumSelectList<Surface>()"></select>
+                    <span asp-validation-for="PaintingDecoratingWork.Surface" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="PaintingDecoratingWork.ExpectedHours" class="control-label"></label>
+                    <input asp-for="PaintingDecoratingWork.ExpectedHours" class="form-control" />
+                    <span asp-validation-for="PaintingDecoratingWork.ExpectedHours" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="WorkImage" class="control-label"></label>
+                    <input type="file" asp-for="WorkImage" class="form-control" />
+                    <span asp-validation-for="WorkImage" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="PaintingDecoratingWork.ImageDate" class="control-label"></label>
+                    <input asp-for="PaintingDecoratingWork.ImageDate" class="form-control" />
+                    <span asp-validation-for="PaintingDecoratingWork.ImageDate" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="PaintingDecoratingWork.EntryDate" class="control-label"></label>
+                    <input asp-for="PaintingDecoratingWork.EntryDate" class="form-control" />
+                    <span asp-validation-for="PaintingDecoratingWork.EntryDate" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <input type="submit" value="Create" class="btn btn-primary" />
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div>
+        <a asp-page="Index">Back to List</a>
+    </div>
+</section>
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
